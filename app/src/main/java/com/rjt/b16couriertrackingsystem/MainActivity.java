@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     MainContract.MainPresenter presenter;
 
-    private static final String TAG = "MainActivity";
-
     //My branch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,5 +75,4 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 break;
         }
     }
-
 }
