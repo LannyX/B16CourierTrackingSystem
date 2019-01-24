@@ -8,7 +8,7 @@ import android.util.Log;
 import com.rjt.b16couriertrackingsystem.MainActivity;
 import com.rjt.b16couriertrackingsystem.authentication.login.module.User;
 import com.rjt.b16couriertrackingsystem.authentication.login.network.LoginDataService;
-import com.rjt.b16couriertrackingsystem.network.RetrofitClientInstance;
+import com.rjt.b16couriertrackingsystem.authentication.login.network.RetrofitLoginInstance;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +28,7 @@ public class UserLoginPresenter implements UserLoginContract.UserLoginPresenter 
     @Override
     public void requestData(String email, String password, final SharedPreferences sp) {
         if (validateLoginInput(email, password)) {
-            final LoginDataService loginDataService = RetrofitClientInstance.getRetrofitInstance().create(LoginDataService.class);
+            final LoginDataService loginDataService = RetrofitLoginInstance.getRetrofitInstance().create(LoginDataService.class);
             Call<User> call = loginDataService.getUserData();
             call.enqueue(new Callback<User>() {
                 @Override

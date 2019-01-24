@@ -1,7 +1,6 @@
 package com.rjt.b16couriertrackingsystem.countrylist;
 
 import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,8 +26,7 @@ public class CountryListActivity extends AppCompatActivity {
     GetCountryListService getCountryListService;
     private SearchView searchView;
     RecyclerView recyclerView;
-    MyCountryAdapter myCountryAdapter;
-    CountriesList countriesList;
+    MyCountryListAdapter myCountryListAdapter;
 
 
     @Override
@@ -54,9 +52,8 @@ public class CountryListActivity extends AppCompatActivity {
         call.enqueue(new Callback<CountriesList>() {
             @Override
             public void onResponse(Call<CountriesList> call, Response<CountriesList> response) {
-                countriesList = response.body();
+                CountriesList countriesList = response.body();
                 Log.i(TAG, countriesList.getCountryList().size() + "");
-
 
                 callCountriesAdapter(countriesList);
             }
@@ -69,9 +66,8 @@ public class CountryListActivity extends AppCompatActivity {
     }
 
     private void callCountriesAdapter(CountriesList body) {
-
-    myCountryAdapter = new MyCountryAdapter(body.getCountryList());
-    recyclerView.setAdapter(myCountryAdapter);
+        myCountryListAdapter = new MyCountryListAdapter(body);
+        recyclerView.setAdapter(myCountryListAdapter);
     }
 
     @Override
@@ -82,11 +78,8 @@ public class CountryListActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
-        if (searchView != null){
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(
-                    new ComponentName(getApplicationContext(), CountryListActivity.class)));
-        }
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
@@ -94,7 +87,8 @@ public class CountryListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                myCountryAdapter.getFilter().filter(query);
+                // filter recycler view when query submitted
+                myCountryListAdapter.getFilter().filter(query);
                 return false;
             }
 
@@ -102,8 +96,7 @@ public class CountryListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
                 Log.i("xxx", query);
-
-                myCountryAdapter.getFilter().filter(query);
+                myCountryListAdapter.getFilter().filter(query);
                 return false;
             }
         });
@@ -120,15 +113,4 @@ public class CountryListActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onBackPressed() {
-        // close search view on back button pressed
-        if (!searchView.isIconified()) {
-            searchView.setIconified(true);
-            return;
-        }
-        super.onBackPressed();
-    }
-
 }
