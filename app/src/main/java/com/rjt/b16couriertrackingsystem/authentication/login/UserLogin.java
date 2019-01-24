@@ -55,4 +55,9 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
         builder.setMessage("Login: " + msg);
         builder.show();
     }
+
+    @Override
+    public void callingMainActivity() {
+        userLoginPresenter.moveToMainActivity(getApplicationContext());
+    }
 }

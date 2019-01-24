@@ -4,17 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/buttonPickupRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_team"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="42dp"
+        android:text="Pickup Request"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusAll"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonStatusAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="77dp"
+        android:text="All Status"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonStatusVendor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="By Vendor"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusNumber"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonStatusNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="63dp"
+        android:text="BY NUMBER"
+        app:layout_constraintStart_toEndOf="@+id/buttonStatusVendor"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStatusAll" />
+
+    <Button
+        android:id="@+id/buttonStatusToME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="50dp"
+        android:text="BY TOME"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStatusWatchList"
+        app:layout_constraintStart_toStartOf="@+id/buttonStatusWatchList" />
+
+    <Button
+        android:id="@+id/buttonStatusFromMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="BY FROMME"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStatusNumber"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStatusNumber" />
+
+    <Button
+        android:id="@+id/buttonStatusWatchList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="60dp"
+        android:text="BY WATCHLIST"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStatusFromMe" />
 </android.support.constraint.ConstraintLayout>
