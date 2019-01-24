@@ -1,8 +1,11 @@
 package com.rjt.b16couriertrackingsystem.authentication.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.rjt.b16couriertrackingsystem.MainActivity;
 import com.rjt.b16couriertrackingsystem.authentication.login.module.User;
 import com.rjt.b16couriertrackingsystem.authentication.login.network.LoginDataService;
 import com.rjt.b16couriertrackingsystem.authentication.login.network.RetrofitLoginInstance;
@@ -48,6 +51,7 @@ public class UserLoginPresenter implements UserLoginContract.UserLoginPresenter 
 
 
                     view.showMsg(response.body().getMsg());
+                    view.callingMainActivity();
                 }
 
                 @Override
@@ -56,6 +60,12 @@ public class UserLoginPresenter implements UserLoginContract.UserLoginPresenter 
                 }
             });
         }
+    }
+
+    @Override
+    public void moveToMainActivity(Context context) {
+        Intent i = new Intent(context, MainActivity.class);
+        context.startActivity(i);
     }
 
     private boolean validateLoginInput(String email, String password) {
