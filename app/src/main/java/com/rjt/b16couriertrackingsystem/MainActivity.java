@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 break;
             case R.id.buttonStatusAll:
                 setButtonInvisible();
+                presenter.openStatusAll(this);
                 break;
             case R.id.buttonStatusVendor:
                 setButtonInvisible();

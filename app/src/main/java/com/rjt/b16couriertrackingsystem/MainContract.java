@@ -10,5 +10,6 @@ public interface MainContract {
 
     interface MainPresenter{
         void openPickupRequest(MainActivity activity);
+        void openStatusAll(MainActivity activity);
     }
 }
