@@ -14,14 +14,14 @@ public class MainPresenter implements MainContract.MainPresenter {
     MainContract.MainView view;
 
     public MainPresenter(MainActivity activity){
-        view = activity;
+        view = (MainContract.MainView) activity;
     }
 
     @Override
     public void openPickupRequest(MainActivity activity) {
         PickupRequest fm = new PickupRequest();
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.MainActivity, fm , "");
+        transaction.replace(R.id.drawer_layout, fm , "");
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -30,7 +30,7 @@ public class MainPresenter implements MainContract.MainPresenter {
     public void openStatusAll(MainActivity activity) {
         AllStatusRequest fm = new AllStatusRequest();
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.MainActivity, fm , "");
+        transaction.replace(R.id.drawer_layout, fm , "");
         transaction.addToBackStack(null);
         transaction.commit();
     }
