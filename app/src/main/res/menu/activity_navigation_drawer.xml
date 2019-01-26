@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/barcode_scanner"
+            android:icon="@drawable/barcode_scan"
+            android:title="Barcode Scanner" />
+        <item
+            android:id="@+id/pickup_request"
+            android:icon="@drawable/package_variant_closed"
+            android:title="Pickup Request" />
+        <item
+            android:id="@+id/shipment_status"
+            android:icon="@drawable/truck"
+            android:title="Shipment Status" />
+        <item
+            android:id="@+id/search_nearby"
+            android:icon="@drawable/google_maps"
+            android:title="Search Nearby" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:icon="@drawable/settings_outline"
+                    android:id="@+id/settings"
+                    android:title="Settings" />
+                <item
+                    android:icon="@drawable/face_agent"
+                    android:id="@+id/support"
+                    android:title="Contact Us" />
+                <item
+                    android:icon="@drawable/logout_variant"
+                    android:id="@+id/logout"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+</menu>
+
