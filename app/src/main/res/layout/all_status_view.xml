@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorOrange"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/allStatusId"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusSta"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusVendor"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusPickup"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusPickupTime"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+    <TextView
+        android:id="@+id/allStatusDeliveryTime"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlue"/>
+
+</LinearLayout>
