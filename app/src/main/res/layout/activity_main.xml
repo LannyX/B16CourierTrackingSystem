@@ -1,76 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- This DrawerLayout has two children at the root  -->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/buttonPickupRequest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:text="Pickup Request"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusAll"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!-- This LinearLayout represents the contents of the screen  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- The ActionBar displayed at the top -->
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!-- The main content view where fragments are loaded -->
+        <FrameLayout
+            android:id="@+id/flContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonStatusAll"
+    <!-- The navigation drawer that comes from the left -->
+    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="77dp"
-        android:text="All Status"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonStatusVendor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:text="By Vendor"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusNumber"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonStatusNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="63dp"
-        android:text="BY NUMBER"
-        app:layout_constraintStart_toEndOf="@+id/buttonStatusVendor"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStatusAll" />
-
-    <Button
-        android:id="@+id/buttonStatusToME"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="50dp"
-        android:text="BY TOME"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStatusWatchList"
-        app:layout_constraintStart_toStartOf="@+id/buttonStatusWatchList" />
-
-    <Button
-        android:id="@+id/buttonStatusFromMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="BY FROMME"
-        app:layout_constraintEnd_toEndOf="@+id/buttonStatusNumber"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStatusNumber" />
-
-    <Button
-        android:id="@+id/buttonStatusWatchList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="60dp"
-        android:text="BY WATCHLIST"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStatusFromMe" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:headerLayout="@layout/nav_header_navigation"
+        app:menu="@menu/activity_navigation_drawer" />
+</android.support.v4.widget.DrawerLayout>

@@ -34,9 +34,16 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-
     //butterKnife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
+    //Android Vision for Barcode Scanner
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.android.support:design:28.0.0'
+}
+dependencies {
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+}
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
 }
