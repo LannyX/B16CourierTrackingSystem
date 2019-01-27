@@ -25,7 +25,7 @@ public class AllStatusRequestPresenter implements AllStatusRequestContract.AllSt
         b.putString("email", email);
         fm.setArguments(b);
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.MainActivity, fm , "");
+        transaction.replace(R.id.flContent, fm , "");
         transaction.addToBackStack(null);
         transaction.commit();
 

@@ -22,9 +22,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    //Maps and location dependencies
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
@@ -45,6 +42,8 @@ dependencies {
     //Android Vision for Barcode Scanner
     implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.android.support:design:28.0.0'
+    //Maps and location dependencies
+    implementation 'com.google.gms:google-services:4.2.0'
 }
 dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
