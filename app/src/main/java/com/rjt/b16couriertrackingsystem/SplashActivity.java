@@ -12,13 +12,8 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
-
         startActivity(new Intent(getApplicationContext(), TermConditionScreenActivity.class));
-
-
         finish();
     }
 }
