@@ -12,5 +12,9 @@ public interface MainContract {
         void openPickupRequest(MainActivity activity);
         void openStatusAll(MainActivity activity);
         void openStatusVendor(MainActivity activity);
+        void openStatusTracking(MainActivity activity);
+        void openStatusToMe(MainActivity activity);
+        void openStatusFromMe(MainActivity activity);
+        void openStatusWatchList(MainActivity activity);
     }
 }
