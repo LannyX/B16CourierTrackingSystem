@@ -1,5 +1,7 @@
-package com.rjt.b16couriertrackingsystem.api.status.all;
+package com.rjt.b16couriertrackingsystem.api.status.number;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,29 +24,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllStatusRequestView extends Fragment {
 
-    public static String TAG = AllStatusRequestView.class.getSimpleName();
+public class StatusNumberView extends Fragment {
+
+    private static String TAG = StatusNumberView.class.getSimpleName();
     RecyclerView recyclerView;
     StatusResponseListAdapter myAdapter;
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_status_view, container, false);
-        recyclerView = view.findViewById(R.id.allStatusRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_number_status_view, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewNumber);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         Bundle b = getArguments();
-        String email = b.getString("email");
+        String trackNumber = b.getString("trackNumber");
+        SharedPreferences sp = getActivity().getSharedPreferences("userFile", Context.MODE_PRIVATE);
+        String email = sp.getString("email", "");
 
-        if(validate(email)){
+        if(validate(trackNumber)){
             final StatusResponseService statusResponseService = RetrofitClientInstance.getRetrofitInstance()
                     .create(StatusResponseService.class);
-            Call<StatusResponseList> call = statusResponseService.getResponseList(email);
+            Call<StatusResponseList> call = statusResponseService.getResponseNumber(email, trackNumber);
             Log.e(TAG, "CALLING RESPONSE");
             call.enqueue(new Callback<StatusResponseList>() {
                 @Override
@@ -69,9 +73,9 @@ public class AllStatusRequestView extends Fragment {
     }
 
 
-    private boolean validate(String email) {
+    private boolean validate(String trackNumber) {
         boolean result = false;
-        if(!email.isEmpty()){
+        if(!trackNumber.isEmpty()){
             result = true;
         }
         return result;

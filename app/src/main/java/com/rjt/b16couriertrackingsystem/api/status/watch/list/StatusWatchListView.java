@@ -1,5 +1,7 @@
-package com.rjt.b16couriertrackingsystem.api.status.all;
+package com.rjt.b16couriertrackingsystem.api.status.watch.list;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,43 +24,41 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllStatusRequestView extends Fragment {
-
-    public static String TAG = AllStatusRequestView.class.getSimpleName();
+public class StatusWatchListView extends Fragment {
+    private static String TAG = StatusWatchListView.class.getSimpleName();
     RecyclerView recyclerView;
     StatusResponseListAdapter myAdapter;
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_status_view, container, false);
-        recyclerView = view.findViewById(R.id.allStatusRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_watchlist_status_view, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewWatchList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Bundle b = getArguments();
-        String email = b.getString("email");
+        SharedPreferences sp = getActivity().getSharedPreferences("userFile", Context.MODE_PRIVATE);
+        String email = sp.getString("email", "");
 
-        if(validate(email)){
-            final StatusResponseService statusResponseService = RetrofitClientInstance.getRetrofitInstance()
-                    .create(StatusResponseService.class);
-            Call<StatusResponseList> call = statusResponseService.getResponseList(email);
-            Log.e(TAG, "CALLING RESPONSE");
-            call.enqueue(new Callback<StatusResponseList>() {
-                @Override
-                public void onResponse(Call<StatusResponseList> call, Response<StatusResponseList> response) {
-                    StatusResponseList list = response.body();
-                    callAdapter(list);
-                }
 
-                @Override
-                public void onFailure(Call<StatusResponseList> call, Throwable t) {
-                    t.getMessage();
-                }
-            });
-        }
+        final StatusResponseService statusResponseService = RetrofitClientInstance.getRetrofitInstance()
+                .create(StatusResponseService.class);
+        Call<StatusResponseList> call = statusResponseService.getReponseWatchList(email, "w");
+        Log.e(TAG, "CALLING RESPONSE TOME");
+        call.enqueue(new Callback<StatusResponseList>() {
+            @Override
+            public void onResponse(Call<StatusResponseList> call, Response<StatusResponseList> response) {
+                StatusResponseList list = response.body();
+                Log.e(TAG, response.toString());
+                callAdapter(list);
+            }
+
+            @Override
+            public void onFailure(Call<StatusResponseList> call, Throwable t) {
+                t.getMessage();
+            }
+        });
 
         return view;
     }
@@ -66,14 +66,5 @@ public class AllStatusRequestView extends Fragment {
     private void callAdapter(StatusResponseList list) {
         myAdapter = new StatusResponseListAdapter(list);
         recyclerView.setAdapter(myAdapter);
-    }
-
-
-    private boolean validate(String email) {
-        boolean result = false;
-        if(!email.isEmpty()){
-            result = true;
-        }
-        return result;
     }
 }
