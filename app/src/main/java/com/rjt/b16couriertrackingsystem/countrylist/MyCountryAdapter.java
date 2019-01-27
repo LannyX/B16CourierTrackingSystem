@@ -1,5 +1,8 @@
 package com.rjt.b16couriertrackingsystem.countrylist;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.rjt.b16couriertrackingsystem.R;
 import com.rjt.b16couriertrackingsystem.countrylist.model.Countries;
+import com.rjt.b16couriertrackingsystem.termncondition.TermConditionScreenActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,8 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
 
     List<Countries> myCountries = new ArrayList<>();
     List<Countries> countriesFiltered;
+    SharedPreferences sp;
+    Context mContext;
 
     public MyCountryAdapter(List<Countries> myCountries) {
         this.myCountries = myCountries;
@@ -31,6 +37,7 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
     @Override
     public MyCountryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.countrylist_view_item, viewGroup, false);
+
 
         return new MyViewHolder(view);
     }
@@ -42,20 +49,28 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
+
             vAlbumId = itemView.findViewById(R.id.textViewCountryName);
 
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyCountryAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyCountryAdapter.MyViewHolder myViewHolder, int i) {
 //        List<Countries> list = myCountries;
         final Countries country = myCountries.get(i);
         myViewHolder.vAlbumId.setText(country.getCountryname());
-        
+
         myViewHolder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sp = v.getContext().getSharedPreferences("userFile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("country", country.getCountryname()).commit();
+
+                v.getContext().startActivity(new Intent(v.getContext(), TermConditionScreenActivity.class));
+
                 Toast.makeText(v.getContext(), country.getCountryname(), Toast.LENGTH_SHORT).show();
             }
         });

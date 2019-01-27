@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rjt.b16couriertrackingsystem.R;
-import com.rjt.b16couriertrackingsystem.countrylist.CountryListActivity;
+import com.rjt.b16couriertrackingsystem.authentication.login.UserLogin;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +45,7 @@ public class TermConditionScreenActivity extends AppCompatActivity {
     @OnClick(R.id.button)
     public void onViewClicked() {
         if(checkBoxAccept.isChecked()){
-            Intent i = new Intent(this, CountryListActivity.class);
+            Intent i = new Intent(this, UserLogin.class);
             startActivity(i);
         }else {
             Toast.makeText(this, "Please confirm to proceed", Toast.LENGTH_SHORT).show();

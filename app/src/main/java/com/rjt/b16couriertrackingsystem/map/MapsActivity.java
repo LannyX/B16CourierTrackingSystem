@@ -16,11 +16,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -42,7 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
         , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
-        , Serializable{
+        , Serializable {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
@@ -52,8 +54,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
     private double latitide, longitude;
+    LatLng latLng;
     List<Result> nearbyList;
     boolean hasLocation = false;
+    FusedLocationProviderClient mFusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,24 +65,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
         }
-        
+
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        GoogleMapOptions options = new GoogleMapOptions();
+        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
+                .compassEnabled(false)
+                .rotateGesturesEnabled(false)
+                .tiltGesturesEnabled(false)
+                .liteMode(false);
     }
 
-    public void findNearByPostoffice(View view){
+    public void findNearByPostoffice(View view) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+                .baseUrl("https://maps.googleapis.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         PlaceAPI service = retrofit.create(PlaceAPI.class);
 
@@ -95,10 +106,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onResponse(Call<Place> call, Response<Place> response) {
                 Place place = response.body();
 
-                List<Result> resultList= place.getResults();
+                List<Result> resultList = place.getResults();
                 nearbyList = resultList;
 
-                for(Result result : resultList){
+                for (Result result : resultList) {
                     Double lat = result.getGeo().getLo().getLat();
                     Double lng = result.getGeo().getLo().getLng();
                     String name = result.getName();
@@ -107,13 +118,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     LatLng latLng = new LatLng(lat, lng);
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.title( name+ " " +vicinity);
+                    markerOptions.title(name + " " + vicinity);
                     markerOptions.position(latLng);
 
                     mMap.addMarker(markerOptions);
                 }
                 hasLocation = true;
             }
+
             @Override
             public void onFailure(Call<Place> call, Throwable t) {
                 Log.i("xxx", t.getMessage());
@@ -123,24 +135,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
-    public boolean checkUserLocationPermission()
-    {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
-            {
+    public boolean checkUserLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
-            }
-            else
-            {
+            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
             }
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -159,16 +162,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             buildGoogleApiClient();
 
             mMap.setMyLocationEnabled(true);
+
+
+            if (latLng != null) {
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Current Place"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            }else{
+                LatLng chicago = new LatLng(41.884178, -87.633242);
+                mMap.addMarker(new MarkerOptions().position(chicago).title("Marker in Chicago"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(chicago));
+            }
         }
     }
 
-    protected synchronized void buildGoogleApiClient()
-    {
+    protected synchronized void buildGoogleApiClient() {
         client = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -186,12 +198,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         lastLocation = location;
         Log.i("xxx", latitide + "" + longitude);
 
-        if (currentUserLocationMarker != null)
-        {
+        if (currentUserLocationMarker != null) {
             currentUserLocationMarker.remove();
         }
 
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -203,8 +214,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
 
-        if (client != null)
-        {
+        if (client != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(client, this);
         }
     }
@@ -231,7 +241,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
     public void viewResultinList(View view) {
         if(hasLocation == true){
             Bundle b = new Bundle();
@@ -248,4 +257,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "You need to search first!", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
