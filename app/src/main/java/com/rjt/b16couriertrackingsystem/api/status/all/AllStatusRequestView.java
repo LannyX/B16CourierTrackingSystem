@@ -8,22 +8,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rjt.b16couriertrackingsystem.R;
-import com.rjt.b16couriertrackingsystem.api.module.StatusResponse;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseList;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseListAdapter;
-import com.rjt.b16couriertrackingsystem.api.status.all.network.AllStatusResponseService;
+import com.rjt.b16couriertrackingsystem.api.status.all.network.StatusResponseService;
 import com.rjt.b16couriertrackingsystem.network.RetrofitClientInstance;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,9 +42,9 @@ public class AllStatusRequestView extends Fragment {
         String email = b.getString("email");
 
         if(validate(email)){
-            final AllStatusResponseService allStatusResponseService = RetrofitClientInstance.getRetrofitInstance()
-                    .create(AllStatusResponseService.class);
-            Call<StatusResponseList> call = allStatusResponseService.getResponseList(email);
+            final StatusResponseService statusResponseService = RetrofitClientInstance.getRetrofitInstance()
+                    .create(StatusResponseService.class);
+            Call<StatusResponseList> call = statusResponseService.getResponseList(email);
             Log.e(TAG, "CALLING RESPONSE");
             call.enqueue(new Callback<StatusResponseList>() {
                 @Override

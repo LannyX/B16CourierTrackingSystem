@@ -34,9 +34,9 @@ public class StatusResponseListAdapter extends RecyclerView.Adapter<StatusRespon
 
 
         allStatusId.setText(item.getStatus().get(i).getShipmentid());
-        allStatusName.setText(item.getStatus().get(i).getPackagename());
-        allStatusSta.setText(item.getStatus().get(i).getShipmentstatus());
-        allStatusVendor.setText(item.getStatus().get(i).getVendor());
+        allStatusName.setText("Package name: " + item.getStatus().get(i).getPackagename());
+        allStatusSta.setText("Package Status: " + item.getStatus().get(i).getShipmentstatus());
+        allStatusVendor.setText("Vendor: " + item.getStatus().get(i).getVendor());
         allStatusDelivery.setText(item.getStatus().get(i).getDeliveryaddress());
         allStatusPickup.setText(item.getStatus().get(i).getPickupaddress());
         allStatusDeliveryTime.setText(item.getStatus().get(i).getDeliverytime());

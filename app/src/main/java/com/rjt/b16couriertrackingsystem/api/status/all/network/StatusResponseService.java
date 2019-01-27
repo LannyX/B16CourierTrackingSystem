@@ -12,8 +12,12 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface AllStatusResponseService {
+public interface StatusResponseService {
 
     @GET("shipment_status_all.php?")
     Call<StatusResponseList> getResponseList(@Query("email") String email);
+
+    @GET("shipment_status_vendor.php?")
+    Call<StatusResponseList> getResponseVendor(@Query("email") String email,
+                                               @Query("vendor") String vendor);
 }
