@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.rjt.b16couriertrackingsystem.barcodescanner.ScannerActivity;
+import com.rjt.b16couriertrackingsystem.map.MapsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
             case R.id.shipment_status:
                 setButtonInvisible();
                 presenter.openStatusAll(this);
+                break;
+            case R.id.search_nearby:
+                setButtonInvisible();
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
                 break;
 //            default:
 //                fragmentClass = FirstFragment.class;

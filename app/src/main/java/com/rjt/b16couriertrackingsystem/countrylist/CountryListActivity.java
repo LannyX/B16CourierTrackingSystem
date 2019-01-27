@@ -3,6 +3,7 @@ package com.rjt.b16couriertrackingsystem.countrylist;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,6 +30,7 @@ public class CountryListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyCountryAdapter myCountryAdapter;
     CountriesList countriesList;
+    SharedPreferences sp;
 
 
     @Override
@@ -37,7 +39,7 @@ public class CountryListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_country_list);
 
         recyclerView = findViewById(R.id.countryListRecyclerView);
-
+        sp = getSharedPreferences("userFile",MODE_PRIVATE);
         getCountryListService = RetrofitClientInstance.getRetrofitInstance().create(GetCountryListService.class);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -46,6 +48,7 @@ public class CountryListActivity extends AppCompatActivity {
 
         getCountryList();
 
+//        Log.i(TAG, "READ SP: " + sp.getString("country", ""));
     }
 
     private void getCountryList() {
@@ -72,6 +75,7 @@ public class CountryListActivity extends AppCompatActivity {
 
     myCountryAdapter = new MyCountryAdapter(body.getCountryList());
     recyclerView.setAdapter(myCountryAdapter);
+
     }
 
     @Override
