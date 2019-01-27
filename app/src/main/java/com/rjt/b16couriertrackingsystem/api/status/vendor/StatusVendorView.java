@@ -16,7 +16,7 @@ import com.rjt.b16couriertrackingsystem.R;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseList;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseListAdapter;
 import com.rjt.b16couriertrackingsystem.api.status.all.AllStatusRequestView;
-import com.rjt.b16couriertrackingsystem.api.status.all.network.StatusResponseService;
+import com.rjt.b16couriertrackingsystem.api.status.network.StatusResponseService;
 import com.rjt.b16couriertrackingsystem.network.RetrofitClientInstance;
 
 import retrofit2.Call;

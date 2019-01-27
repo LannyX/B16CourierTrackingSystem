@@ -137,15 +137,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusNumber:
+                presenter.openStatusTracking(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusToME:
+                presenter.openStatusToMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusFromMe:
+                presenter.openStatusFromMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusWatchList:
+                presenter.openStatusWatchList(this);
                 setButtonInvisible();
                 break;
         }
