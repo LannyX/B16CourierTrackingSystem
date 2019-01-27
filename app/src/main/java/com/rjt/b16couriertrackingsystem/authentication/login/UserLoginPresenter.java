@@ -26,7 +26,7 @@ public class UserLoginPresenter implements UserLoginContract.UserLoginPresenter 
     }
 
     @Override
-    public void requestData(String email, String password, final SharedPreferences sp) {
+    public void requestData(final String email, String password, final SharedPreferences sp) {
         if (validateLoginInput(email, password)) {
             final LoginDataService loginDataService = RetrofitLoginInstance.getRetrofitInstance().create(LoginDataService.class);
             Call<User> call = loginDataService.getUserData();
@@ -44,6 +44,7 @@ public class UserLoginPresenter implements UserLoginContract.UserLoginPresenter 
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("api", response.body().getAppapikey());
                     editor.putString("id", response.body().getUserid());
+                    editor.putString("email", email);
                     editor.commit();
 
                     //test shared preferences - works
