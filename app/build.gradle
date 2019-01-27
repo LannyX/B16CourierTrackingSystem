@@ -50,13 +50,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:+'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 }
 dependencies {
-    // google mobile vision
-    implementation 'com.google.android.gms:play-services-vision:11.0.2'
-
-    // barcode reader
-    implementation 'info.androidhive:barcode-reader:1.1.5'
-    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:+'
 }

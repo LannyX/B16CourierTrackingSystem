@@ -2,7 +2,6 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,170 +30,70 @@
 
             <Button
                 android:id="@+id/buttonPickupRequest"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="31dp"
-                android:layout_marginEnd="47dp"
+                android:layout_marginStart="42dp"
                 android:text="Pickup Request"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewVendor"
-                app:layout_constraintEnd_toStartOf="@+id/buttonStatusAll"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewRequest" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusAll"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/buttonStatusAll"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="33dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginEnd="77dp"
                 android:text="All Status"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewNumber"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/buttonPickupRequest"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewAll" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/buttonStatusVendor"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="46dp"
+                android:layout_marginStart="80dp"
                 android:text="By Vendor"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewToMe"
-                app:layout_constraintEnd_toStartOf="@+id/buttonStatusNumber"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewVendor" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/buttonStatusNumber"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/buttonStatusNumber"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="33dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="63dp"
                 android:text="BY NUMBER"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewFromMe"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/buttonStatusVendor"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonStatusAll" />
 
             <Button
                 android:id="@+id/buttonStatusToME"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="27dp"
-                android:layout_marginEnd="51dp"
-                android:layout_marginBottom="9dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="50dp"
                 android:text="BY TOME"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewWatchList"
-                app:layout_constraintEnd_toStartOf="@+id/buttonStatusFromMe"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewToMe" />
+                app:layout_constraintBottom_toTopOf="@+id/buttonStatusWatchList"
+                app:layout_constraintStart_toStartOf="@+id/buttonStatusWatchList" />
 
             <Button
                 android:id="@+id/buttonStatusFromMe"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="33dp"
-                android:layout_marginBottom="194dp"
+                android:layout_marginTop="56dp"
                 android:text="BY FROMME"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/buttonStatusToME"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewAll" />
+                app:layout_constraintEnd_toEndOf="@+id/buttonStatusNumber"
+                app:layout_constraintTop_toBottomOf="@+id/buttonStatusNumber" />
 
             <Button
                 android:id="@+id/buttonStatusWatchList"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="27dp"
+                android:layout_marginStart="57dp"
+                android:layout_marginTop="60dp"
                 android:text="BY WATCHLIST"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewWatchList" />
-
-            <ImageView
-                android:id="@+id/imageViewRequest"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="47dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonPickupRequest"
-                app:layout_constraintEnd_toStartOf="@+id/imageViewAll"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewAll"
-                android:layout_width="150dp"
-                android:layout_height="110dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="33dp"
-                android:layout_marginBottom="318dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusFromMe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewRequest"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewVendor"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="1dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusVendor"
-                app:layout_constraintEnd_toStartOf="@+id/imageViewNumber"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonPickupRequest"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewNumber"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="34dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusNumber"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewVendor"
-                app:layout_constraintTop_toBottomOf="@+id/buttonStatusAll"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewToMe"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusToME"
-                app:layout_constraintEnd_toStartOf="@+id/imageViewFromMe"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonStatusVendor"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewFromMe"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="34dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusFromMe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewToMe"
-                app:layout_constraintTop_toBottomOf="@+id/buttonStatusNumber"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageViewWatchList"
-                android:layout_width="150dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonStatusWatchList"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonStatusToME"
-                tools:srcCompat="@tools:sample/avatars" />
-
+                app:layout_constraintTop_toBottomOf="@+id/buttonStatusFromMe" />
 
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
