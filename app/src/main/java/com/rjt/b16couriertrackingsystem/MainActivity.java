@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.rjt.b16couriertrackingsystem.barcodescanner.ScannerActivity;
 import com.rjt.b16couriertrackingsystem.map.MapsActivity;
@@ -19,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements MainContract.MainView{
+public class MainActivity extends AppCompatActivity implements MainContract.MainView {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.buttonPickupRequest)
@@ -36,6 +37,20 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     Button buttonStatusFromMe;
     @BindView(R.id.buttonStatusWatchList)
     Button buttonStatusWatchList;
+    @BindView(R.id.imageViewRequest)
+    ImageView imageViewRequest;
+    @BindView(R.id.imageViewAll)
+    ImageView imageViewAll;
+    @BindView(R.id.imageViewVendor)
+    ImageView imageViewVendor;
+    @BindView(R.id.imageViewNumber)
+    ImageView imageViewNumber;
+    @BindView(R.id.imageViewToMe)
+    ImageView imageViewToMe;
+    @BindView(R.id.imageViewFromMe)
+    ImageView imageViewFromMe;
+    @BindView(R.id.imageViewWatchList)
+    ImageView imageViewWatchList;
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
@@ -49,6 +64,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        imageViewRequest.setImageResource(R.drawable.request);
+        imageViewAll.setImageResource(R.drawable.all);
+        imageViewVendor.setImageResource(R.drawable.vendor);
+        imageViewNumber.setImageResource(R.drawable.number);
+        imageViewToMe.setImageResource(R.drawable.tome);
+        imageViewFromMe.setImageResource(R.drawable.fromme);
+        imageViewWatchList.setImageResource(R.drawable.list);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
