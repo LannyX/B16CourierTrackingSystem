@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.rjt.b16couriertrackingsystem.barcodescanner.ScannerActivity;
+import com.rjt.b16couriertrackingsystem.countrylist.CountryListActivity;
+import com.rjt.b16couriertrackingsystem.demo.Demo;
 import com.rjt.b16couriertrackingsystem.map.MapsActivity;
 
 import butterknife.BindView;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
+    Button buttonBack;
     MainContract.MainPresenter presenter;
 
     //My branch
@@ -72,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         imageViewToMe.setImageResource(R.drawable.tome);
         imageViewFromMe.setImageResource(R.drawable.fromme);
         imageViewWatchList.setImageResource(R.drawable.list);
+
+        buttonBack = findViewById(R.id.toolBarBackButton);
+        buttonBack.setVisibility(View.GONE);
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,21 +117,42 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 //        Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.barcode_scanner:
+                setPictureInvisible();
 //                fragmentClass = FirstFragment.class;
                 startActivity(new Intent(MainActivity.this, ScannerActivity.class));
                 break;
             case R.id.pickup_request:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openPickupRequest(this);
                 break;
             case R.id.shipment_status:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openStatusAll(this);
                 break;
             case R.id.search_nearby:
+                setPictureInvisible();
                 setButtonInvisible();
                 startActivity(new Intent(MainActivity.this, MapsActivity.class));
                 break;
+            case R.id.support:
+                setPictureInvisible();
+                setButtonInvisible();
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent,new SupportFragment()).addToBackStack(null).commit();
+                break;
+
+            case R.id.settings:
+                setPictureInvisible();
+                setButtonInvisible();
+                startActivity(new Intent(MainActivity.this, CountryListActivity.class));
+                break;
+            case R.id.about:
+                setPictureInvisible();
+                setButtonInvisible();
+                startActivity(new Intent(MainActivity.this, Demo.class));
+                break;
+
 //            default:
 //                fragmentClass = FirstFragment.class;
         }
@@ -153,30 +181,37 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonPickupRequest:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openPickupRequest(this);
                 break;
             case R.id.buttonStatusAll:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openStatusAll(this);
                 break;
             case R.id.buttonStatusVendor:
+                setPictureInvisible();
                 presenter.openStatusVendor(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusNumber:
+                setPictureInvisible();
                 presenter.openStatusTracking(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusToME:
+                setPictureInvisible();
                 presenter.openStatusToMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusFromMe:
+                setPictureInvisible();
                 presenter.openStatusFromMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusWatchList:
+                setPictureInvisible();
                 presenter.openStatusWatchList(this);
                 setButtonInvisible();
                 break;
@@ -197,5 +232,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    private void setPictureInvisible() {
+        imageViewRequest.setVisibility(View.INVISIBLE);
+        imageViewAll.setVisibility(View.INVISIBLE);
+        imageViewVendor.setVisibility(View.INVISIBLE);
+        imageViewNumber.setVisibility(View.INVISIBLE);
+        imageViewToMe.setVisibility(View.INVISIBLE);
+        imageViewFromMe.setVisibility(View.INVISIBLE);
+        imageViewWatchList.setVisibility(View.INVISIBLE);
     }
 }

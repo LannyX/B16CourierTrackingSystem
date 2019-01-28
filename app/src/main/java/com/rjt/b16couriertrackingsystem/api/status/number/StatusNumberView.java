@@ -1,6 +1,7 @@
 package com.rjt.b16couriertrackingsystem.api.status.number;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.rjt.b16couriertrackingsystem.MainActivity;
 import com.rjt.b16couriertrackingsystem.R;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseList;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseListAdapter;
@@ -30,6 +33,7 @@ public class StatusNumberView extends Fragment {
     private static String TAG = StatusNumberView.class.getSimpleName();
     RecyclerView recyclerView;
     StatusResponseListAdapter myAdapter;
+    Button buttonBack;
 
     @Nullable
     @Override
@@ -39,6 +43,8 @@ public class StatusNumberView extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        buttonBack = view.findViewById(R.id.toolBarBackButton);
+
 
         Bundle b = getArguments();
         String trackNumber = b.getString("trackNumber");
@@ -64,6 +70,18 @@ public class StatusNumberView extends Fragment {
             });
         }
 
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Fragment fragment:getActivity().getSupportFragmentManager().getFragments()) {
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
+
+                Intent i = new Intent(getActivity(),  MainActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 
