@@ -3,6 +3,7 @@ package com.rjt.b16couriertrackingsystem.api.status.network;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponse;
 import com.rjt.b16couriertrackingsystem.api.module.StatusResponseList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -31,4 +32,8 @@ public interface StatusResponseService {
     @GET("shipment_status_watchlist.php?")
     Call<StatusResponseList> getReponseWatchList(@Query("email") String email,
                                             @Query("watchlist") String list);
+
+    @GET("cst_reg.php?")
+    Call<ResponseBody> registerUser(@Query("email") String email,
+                                    @Query("password") String password);
 }

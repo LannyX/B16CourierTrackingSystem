@@ -40,6 +40,10 @@ public class StatusVendor extends Fragment implements StatusVendorContract.Statu
         imageButtonFedex = view.findViewById(R.id.imageButtonFedex);
         imageButtonHCL = view.findViewById(R.id.imageButtonHCL);
 
+        imageButtonCST.setImageResource(R.drawable.cst);
+        imageButtonFedex.setImageResource(R.drawable.fedex);
+        imageButtonHCL.setImageResource(R.drawable.hcl);
+
         SharedPreferences sp = getActivity().getSharedPreferences("userFile", Context.MODE_PRIVATE);
         email = sp.getString("email", "");
 
