@@ -47,7 +47,8 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".termncondition.TermConditionScreenActivity"></activity>
-        <activity android:name=".authentication.login.UserLogin"></activity>
+        <activity android:name=".authentication.login.UserLogin"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".MainActivity"></activity>
 
         <activity android:name=".barcodescanner.ScannerActivity"></activity>
