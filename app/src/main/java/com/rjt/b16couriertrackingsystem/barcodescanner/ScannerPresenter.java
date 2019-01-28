@@ -1,39 +1,49 @@
 package com.rjt.b16couriertrackingsystem.barcodescanner;
 
-import com.google.zxing.integration.android.IntentIntegrator;
+import android.util.Log;
+import android.util.SparseArray;
+import com.google.android.gms.vision.barcode.Barcode;
+import java.util.List;
+import info.androidhive.barcode.BarcodeReader;
 
-public class ScannerPresenter implements ScannerContract.Presenter{
+public class ScannerPresenter implements ScannerContract.IPresenter , BarcodeReader.BarcodeReaderListener{
+
+    private ScannerContract.IView iView;
     private static final String TAG = "ScannerPresenter";
-    ScannerContract.View view;
+    private BarcodeReader barcodeReader;
 
-    public ScannerPresenter (ScannerActivity activity){
-        view = activity;
+    public ScannerPresenter(ScannerActivity scannerActivity) {
+        this.iView = scannerActivity;
     }
 
     @Override
-    public void requestBarcodeScan(IntentIntegrator qrScan) {
-//        qrScan = new IntentIntegrator(ScannerPresenter.this);
-        qrScan.initiateScan();
+    public void decodeBarcode(BarcodeReader barcodeReader) {
+        this.barcodeReader = barcodeReader;
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-//        if (intentResult!=null){
-//            if (intentResult.getContents()==null){
-//                Toast.makeText(getApplicationContext(), "No Scan Data Found!", Toast.LENGTH_SHORT).show();
-//            }
-//            else {
-//              Log.d(TAG, "onActivityResult: " + intentResult.getContents());
-//                Toast.makeText(getApplicationContext(), "Scanned " + intentResult.getContents(), Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        else
-//        {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
+    @Override
+    public void onScanned(Barcode barcode) {
+        Log.d(TAG, "onScanned: " + barcode.toString());
+        iView.getResponse(barcode.displayValue);
+    }
 
+    @Override
+    public void onScannedMultiple(List<Barcode> barcodes) {
 
+    }
 
+    @Override
+    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
+
+    }
+
+    @Override
+    public void onScanError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCameraPermissionDenied() {
+
+    }
 }
