@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         imageViewFromMe.setImageResource(R.drawable.fromme);
         imageViewWatchList.setImageResource(R.drawable.list);
 
+
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawer = findViewById(R.id.drawer_layout);
@@ -81,6 +83,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
         //initialize presenter
         presenter = new MainPresenter(this);
+    }
+
+    private void setPictureInvisible() {
+        imageViewRequest.setVisibility(View.INVISIBLE);
+        imageViewAll.setVisibility(View.INVISIBLE);
+        imageViewVendor.setVisibility(View.INVISIBLE);
+        imageViewNumber.setVisibility(View.INVISIBLE);
+        imageViewToMe.setVisibility(View.INVISIBLE);
+        imageViewFromMe.setVisibility(View.INVISIBLE);
+        imageViewWatchList.setVisibility(View.INVISIBLE);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -115,14 +127,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 break;
             case R.id.pickup_request:
                 setButtonInvisible();
+                setPictureInvisible();
                 presenter.openPickupRequest(this);
                 break;
             case R.id.shipment_status:
                 setButtonInvisible();
+                setPictureInvisible();
                 presenter.openStatusAll(this);
                 break;
             case R.id.search_nearby:
                 setButtonInvisible();
+                setPictureInvisible();
                 startActivity(new Intent(MainActivity.this, MapsActivity.class));
                 break;
 //            default:
@@ -153,30 +168,37 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonPickupRequest:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openPickupRequest(this);
                 break;
             case R.id.buttonStatusAll:
+                setPictureInvisible();
                 setButtonInvisible();
                 presenter.openStatusAll(this);
                 break;
             case R.id.buttonStatusVendor:
+                setPictureInvisible();
                 presenter.openStatusVendor(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusNumber:
+                setPictureInvisible();
                 presenter.openStatusTracking(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusToME:
+                setPictureInvisible();
                 presenter.openStatusToMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusFromMe:
+                setPictureInvisible();
                 presenter.openStatusFromMe(this);
                 setButtonInvisible();
                 break;
             case R.id.buttonStatusWatchList:
+                setPictureInvisible();
                 presenter.openStatusWatchList(this);
                 setButtonInvisible();
                 break;
