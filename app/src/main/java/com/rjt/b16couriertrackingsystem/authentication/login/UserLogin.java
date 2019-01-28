@@ -3,12 +3,16 @@ package com.rjt.b16couriertrackingsystem.authentication.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -18,7 +22,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.rjt.b16couriertrackingsystem.R;
-import com.rjt.b16couriertrackingsystem.authentication.login.module.User;
 
 import java.util.Arrays;
 
@@ -46,6 +49,10 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
 
     UserLoginContract.UserLoginPresenter userLoginPresenter;
     SharedPreferences sp;
+    @BindView(R.id.buttonRegistration)
+    Button buttonRegistration;
+    @BindView(R.id.imageView2)
+    ImageView imageView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +60,30 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
         setContentView(R.layout.activity_user_login);
         ButterKnife.bind(this);
         userLoginPresenter = new UserLoginPresenter(this);
-        sp = getSharedPreferences("userFile",MODE_PRIVATE);
+        sp = getSharedPreferences("userFile", MODE_PRIVATE);
+
+        imageView2.setImageResource(R.drawable.user);
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
+
+        buttonRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonRegistration.setVisibility(View.INVISIBLE);
+                buttonLogin.setVisibility(View.INVISIBLE);
+                UserRegistration fm = new UserRegistration();
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.UserLogin, fm, "");
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                Toast.makeText(UserLogin.this, "Sign up", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //onViewClicked();
         // Callback registration
@@ -67,7 +92,7 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 AccessToken accessToken = loginResult.getAccessToken();
-                Log.e(TAG, "onSuccess: access token " + accessToken.getToken() );
+                Log.e(TAG, "onSuccess: access token " + accessToken.getToken());
             }
 
             @Override
@@ -89,7 +114,7 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-                        Log.e(TAG, "onSuccess: Mangager" +loginResult.getAccessToken().getToken() );
+                        Log.e(TAG, "onSuccess: Mangager" + loginResult.getAccessToken().getToken());
                     }
 
                     @Override
@@ -102,10 +127,14 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
                         // App code
                     }
                 });
+
+
     }
 
     @OnClick(R.id.buttonLogin)
     public void onViewClicked() {
+        buttonLogin.setVisibility(View.INVISIBLE);
+        buttonRegistration.setVisibility(View.INVISIBLE);
         userLoginPresenter.requestData(editTextLoginEmail.getText().toString(),
                 editTextLoginPassword.getText().toString(),
                 sp);
@@ -134,8 +163,14 @@ public class UserLogin extends AppCompatActivity implements UserLoginContract.Us
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
 
-
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }
