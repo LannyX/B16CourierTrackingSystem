@@ -15,4 +15,19 @@
     <string name="email_us"><![CDATA[Email Us >]]></string>
     <string name="_1_800_345_2222">800.345.2222</string>
 
-</resources>
+    <string-array name="array_technology">
+        <item>Retrofit2 Library</item>
+        <item>GSON Converter Factory</item>
+        <item>RxJava</item>
+        <item>RxAndroid</item>
+        <item>RecyclerView</item>
+        <item>ButterKnife</item>
+        <item>Google GMS</item>
+        <item>Material Design</item>
+        <item>GMS Google Services</item>
+        <item>Facebook Single Sign-on</item>
+        <item>Android Vision Library</item>
+        <item>Google Place API</item>
+        <item>Google Maps API</item>
+    </string-array>
+    </resources>

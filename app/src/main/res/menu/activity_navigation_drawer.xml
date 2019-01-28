@@ -30,6 +30,10 @@
                     android:id="@+id/support"
                     android:title="Contact Us" />
                 <item
+                    android:icon="@drawable/information_outline"
+                    android:id="@+id/about"
+                    android:title="Technologies" />
+                <item
                     android:icon="@drawable/logout_variant"
                     android:id="@+id/logout"
                     android:title="Logout" />

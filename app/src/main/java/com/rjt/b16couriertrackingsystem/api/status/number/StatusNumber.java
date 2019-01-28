@@ -1,5 +1,6 @@
 package com.rjt.b16couriertrackingsystem.api.status.number;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,13 +27,26 @@ public class StatusNumber extends Fragment implements StatusNumberContract.Statu
     @BindView(R.id.buttonStatusNumber)
     Button buttonStatusNumber;
     Unbinder unbinder;
-
+    Button buttonBack;
     StatusNumberContract.StatusNumberPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_number_status, container, false);
+        buttonBack = view.findViewById(R.id.toolBarBackButton);
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Fragment fragment:getActivity().getSupportFragmentManager().getFragments()) {
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
+
+                Intent i = new Intent(getActivity(),  MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         presenter = new StatusNumberPresenter(this);
         unbinder = ButterKnife.bind(this, view);
