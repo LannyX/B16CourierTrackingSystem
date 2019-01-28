@@ -1,6 +1,7 @@
 package com.rjt.b16couriertrackingsystem.map;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rjt.b16couriertrackingsystem.MainActivity;
 import com.rjt.b16couriertrackingsystem.R;
 import com.rjt.b16couriertrackingsystem.map.model.Place;
 import com.rjt.b16couriertrackingsystem.map.model.Result;
@@ -168,15 +170,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.setMyLocationEnabled(true);
 
-
-            if (latLng != null) {
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Current Place"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            }else{
-                LatLng chicago = new LatLng(41.884178, -87.633242);
-                mMap.addMarker(new MarkerOptions().position(chicago).title("Marker in Chicago"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(chicago));
-            }
         }
     }
 
@@ -212,7 +205,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         currentUserLocationMarker = mMap.addMarker(markerOptions);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
 
         if (client != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(client, this);
@@ -258,4 +251,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+        super.onBackPressed();
+    }
 }
