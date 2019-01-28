@@ -1,5 +1,7 @@
 package com.rjt.b16couriertrackingsystem;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.rjt.b16couriertrackingsystem.authentication.login.UserLogin;
 import com.rjt.b16couriertrackingsystem.barcodescanner.ScannerActivity;
 import com.rjt.b16couriertrackingsystem.countrylist.CountryListActivity;
 import com.rjt.b16couriertrackingsystem.demo.Demo;
@@ -152,7 +155,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 setButtonInvisible();
                 startActivity(new Intent(MainActivity.this, Demo.class));
                 break;
-
+            case R.id.logout:
+                performLogout();
 //            default:
 //                fragmentClass = FirstFragment.class;
         }
@@ -173,6 +177,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
         mDrawer.closeDrawers();
+    }
+
+    private void performLogout() {
+        Intent mStartActivity = new Intent(MainActivity.this, UserLogin.class);
+        int mPendingIntentId = 10;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) MainActivity.this.getSystemService(MainActivity.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 10, mPendingIntent);
+        System.exit(0);
     }
 
 
