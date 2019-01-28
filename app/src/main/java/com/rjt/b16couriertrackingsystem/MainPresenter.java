@@ -1,12 +1,7 @@
 package com.rjt.b16couriertrackingsystem;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 
+import android.support.v4.app.FragmentTransaction;
 import com.rjt.b16couriertrackingsystem.api.status.all.AllStatusRequest;
 import com.rjt.b16couriertrackingsystem.api.status.from.me.StatusFromMeView;
 import com.rjt.b16couriertrackingsystem.api.status.number.StatusNumber;

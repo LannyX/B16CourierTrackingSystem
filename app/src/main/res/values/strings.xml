@@ -12,5 +12,7 @@
 
     <string name="facebook_app_id">2223679707856111</string>
     <string name="fb_login_protocol_scheme">fb2223679707856111</string>
+    <string name="email_us"><![CDATA[Email Us >]]></string>
+    <string name="_1_800_345_2222">800.345.2222</string>
 
 </resources>

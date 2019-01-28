@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.rjt.b16couriertrackingsystem.barcodescanner.ScannerActivity;
+import com.rjt.b16couriertrackingsystem.countrylist.CountryListActivity;
 import com.rjt.b16couriertrackingsystem.map.MapsActivity;
 
 import butterknife.BindView;
@@ -101,6 +102,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
             case R.id.search_nearby:
                 setButtonInvisible();
                 startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                break;
+            case R.id.settings:
+                setButtonInvisible();
+                startActivity(new Intent(getApplicationContext(), CountryListActivity.class));
+                break;
+            case R.id.support:
+                setButtonInvisible();
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent,new SupportFragment()).addToBackStack(null).commit();
                 break;
 //            default:
 //                fragmentClass = FirstFragment.class;

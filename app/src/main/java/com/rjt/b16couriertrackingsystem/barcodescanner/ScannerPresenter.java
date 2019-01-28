@@ -2,8 +2,11 @@ package com.rjt.b16couriertrackingsystem.barcodescanner;
 
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.google.android.gms.vision.barcode.Barcode;
+
 import java.util.List;
+
 import info.androidhive.barcode.BarcodeReader;
 
 public class ScannerPresenter implements ScannerContract.IPresenter , BarcodeReader.BarcodeReaderListener{
