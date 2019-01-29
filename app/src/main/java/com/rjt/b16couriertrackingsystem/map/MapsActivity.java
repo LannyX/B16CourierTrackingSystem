@@ -234,7 +234,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void viewResultinList(View view) {
+//    public void viewResultinList(View view, Boolean hasLocation, MainActivity mainActivity) {
+public void viewResultinList(View view) {
+
         if(hasLocation == true){
             Bundle b = new Bundle();
             b.putSerializable("unique", (Serializable) nearbyList);

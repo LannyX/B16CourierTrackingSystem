@@ -50,8 +50,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.MyViewHold
         nearbyName.setText(result.getName());
         nearbyVin.setText(result.getVicinity());
         nearbyRating.setText("Rating: " + result.getRating().toString());
-        nearbyOpening.setText("Opening now? " + result.getOpeningHours().getOpenNow());
-
+        nearbyOpening.setText("Opening now?  " + result.getOpeningHours().getOpenNow());
     }
 
     @Override

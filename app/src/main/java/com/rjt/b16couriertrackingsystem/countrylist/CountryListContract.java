@@ -6,11 +6,14 @@ public interface CountryListContract {
 
     interface CountryListView{
 
+        void showCountryList(CountriesList countriesList);
+
     }
 
     interface CountryListPresenter{
         void getCountryList();
 
         void callCountriesAdapter(CountriesList body);
+
     }
 }

@@ -1,21 +1,19 @@
 package com.rjt.b16couriertrackingsystem.termncondition;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rjt.b16couriertrackingsystem.R;
-import com.rjt.b16couriertrackingsystem.authentication.login.UserLogin;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TermConditionScreenActivity extends AppCompatActivity {
+public class TermConditionScreenActivity extends AppCompatActivity implements TermConditionScreenContract.TermConditionScreenView{
 
     @BindView(R.id.textView2)
     TextView termConditionTitle;
@@ -25,12 +23,15 @@ public class TermConditionScreenActivity extends AppCompatActivity {
     Button buttonAccpet;
     @BindView(R.id.textView3)
     TextView termConditionBody;
+    TermConditionScreenPresenter termConditionScreenPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_condition_screen);
         ButterKnife.bind(this);
+
+        termConditionScreenPresenter = new TermConditionScreenPresenter(this);
 
         termConditionTitle.setText("Terms and Conditions (\"Terms\")");
         termConditionBody.setText("Please read these Terms and Conditions (\"Terms\", \"Terms and Conditions\") carefully before using the mobile application (the \"Service\") operated by us.\n" +
@@ -39,27 +40,22 @@ public class TermConditionScreenActivity extends AppCompatActivity {
                 "\n" +
                 "By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.\n");
 
-
     }
 
     @OnClick(R.id.button)
     public void onViewClicked() {
         if(checkBoxAccept.isChecked()){
-            Intent i = new Intent(this, UserLogin.class);
-            startActivity(i);
+            termConditionScreenPresenter.moveToNextActivity(getApplicationContext());
         }else {
-            Toast.makeText(this, "Please confirm to proceed", Toast.LENGTH_SHORT).show();
-
+            termConditionScreenPresenter.unableToProceed();
         }
     }
 
-//    public void onCheckboxClicked(View view) {
-//        boolean checked = ((CheckBox) view).isChecked();
-//        if (checked){
-//
-//        }else {
-//        }
-//
-//    }
-
+    @Override
+    public void showMsg(String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(msg);
+        builder.setTitle("Attetion");
+        builder.show();
+    }
 }

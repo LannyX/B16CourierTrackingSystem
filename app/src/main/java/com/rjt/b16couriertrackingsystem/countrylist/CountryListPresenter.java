@@ -13,11 +13,16 @@ import retrofit2.Response;
 
 public class CountryListPresenter implements CountryListContract.CountryListPresenter{
     final String TAG = CountryListPresenter.class.getSimpleName();
+
+    CountryListContract.CountryListView mView;
     GetCountryListService getCountryListService;
     CountriesList countriesList;
     RecyclerView recyclerView;
     MyCountryAdapter myCountryAdapter;
 
+    public CountryListPresenter(CountryListActivity countryListActivity) {
+        mView = countryListActivity;
+    }
 
     @Override
     public void getCountryList() {
@@ -31,8 +36,8 @@ public class CountryListPresenter implements CountryListContract.CountryListPres
                 countriesList = response.body();
                 Log.i(TAG, countriesList.getCountryList().size() + "");
 
-
-                callCountriesAdapter(countriesList);
+//                mView.showCountryList(countriesList);
+//                callCountriesAdapter(countriesList);
             }
 
             @Override
@@ -47,5 +52,6 @@ public class CountryListPresenter implements CountryListContract.CountryListPres
         myCountryAdapter = new MyCountryAdapter(body.getCountryList());
         recyclerView.setAdapter(myCountryAdapter);
     }
+
 
 }
