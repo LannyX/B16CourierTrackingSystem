@@ -38,7 +38,6 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
     public MyCountryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.countrylist_view_item, viewGroup, false);
 
-
         return new MyViewHolder(view);
     }
 
@@ -48,8 +47,6 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
 
             vAlbumId = itemView.findViewById(R.id.textViewCountryName);
 
@@ -69,9 +66,9 @@ public class MyCountryAdapter extends RecyclerView.Adapter<MyCountryAdapter.MyVi
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("country", country.getCountryname()).commit();
 
+                Toast.makeText(v.getContext(), country.getCountryname(), Toast.LENGTH_SHORT).show();
                 v.getContext().startActivity(new Intent(v.getContext(), TermConditionScreenActivity.class));
 
-                Toast.makeText(v.getContext(), country.getCountryname(), Toast.LENGTH_SHORT).show();
             }
         });
     }

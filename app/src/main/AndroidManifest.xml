@@ -41,7 +41,10 @@
         </activity>
         <activity android:name=".countrylist.CountryListActivity"
             android:theme="@style/AppThemeWithActionBar"
-            android:label="Select Your Location">
+            android:label="Select Your Location"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:windowSoftInputMode="adjustNothing">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />

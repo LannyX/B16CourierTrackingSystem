@@ -15,15 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rjt.b16couriertrackingsystem.R;
+import com.rjt.b16couriertrackingsystem.countrylist.model.Countries;
 import com.rjt.b16couriertrackingsystem.countrylist.model.CountriesList;
 import com.rjt.b16couriertrackingsystem.countrylist.network.GetCountryListService;
 import com.rjt.b16couriertrackingsystem.network.RetrofitClientInstance;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CountryListActivity extends AppCompatActivity {
+public class CountryListActivity extends AppCompatActivity implements CountryListContract.CountryListView{
     final String TAG = CountryListActivity.class.getSimpleName();
     GetCountryListService getCountryListService;
     private SearchView searchView;
@@ -31,6 +34,7 @@ public class CountryListActivity extends AppCompatActivity {
     MyCountryAdapter myCountryAdapter;
     CountriesList countriesList;
     SharedPreferences sp;
+    CountryListPresenter mCountryListPresenter;
 
 
     @Override
@@ -38,6 +42,7 @@ public class CountryListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_list);
 
+        mCountryListPresenter = new CountryListPresenter(this);
         recyclerView = findViewById(R.id.countryListRecyclerView);
         sp = getSharedPreferences("userFile",MODE_PRIVATE);
         getCountryListService = RetrofitClientInstance.getRetrofitInstance().create(GetCountryListService.class);
@@ -46,6 +51,7 @@ public class CountryListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+//        mCountryListPresenter.getCountryList();
         getCountryList();
 
 //        Log.i(TAG, "READ SP: " + sp.getString("country", ""));
@@ -78,6 +84,8 @@ public class CountryListActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.country_search_menu, menu);
@@ -105,7 +113,7 @@ public class CountryListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-                Log.i("xxx", query);
+                Log.i(TAG, query);
 
                 myCountryAdapter.getFilter().filter(query);
                 return false;
@@ -135,4 +143,10 @@ public class CountryListActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public void showCountryList(CountriesList countriesList) {
+
+        myCountryAdapter = new MyCountryAdapter((List<Countries>) this);
+        recyclerView.setAdapter(myCountryAdapter);
+    }
 }
