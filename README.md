@@ -3,7 +3,8 @@
 In this application, users are able to check their shipment status or request a pick up using barcode scanner or type, and search nearby location.
 
 ## Steps after launch the app
-1. User can choose the country when they first launch the application.
+1. User can choose the country via search when they first launch the application.
+![image](https://github.com/LannyX/B16CourierTrackingSystem/blob/master/Screen%20Shot%202019-01-28%20at%2012.56.46%20PM.png)
 2. User need to agree to the Term and Condition for the first time.
 3. User Login.
 4. Main Screen with the buttons to navigate to each shipment status.
