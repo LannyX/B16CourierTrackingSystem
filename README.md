@@ -1,8 +1,9 @@
 # CourierTrackingSystem
 
-In this application, users are able to check their shipment status or request a pick up using barcode scanner or type, and search nearby location.
+In this application, users are able to check their shipment status or request a pick up using barcode scanner or type, and search nearby  courier servcie locations.
 
-## Steps after launch the app
+
+## Launching the app
 
 1. User can choose the country via search when they first launch the application.
 
