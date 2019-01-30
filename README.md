@@ -40,10 +40,9 @@ In this application, users are able to check their shipment status or request a 
 4. Search Nearby Location - Uses Google Map, Place API and Retrofit to fetch data to show user's current location and find the nearby Courier Service Location, also uses recyclerView to show them in a list. 
 
 ![image](https://github.com/LannyX/B16CourierTrackingSystem/blob/master/screenshot/Screen%20Shot%202019-01-29%20at%201.27.52%20PM.png)
+![image](https://github.com/LannyX/B16CourierTrackingSystem/blob/master/screenshot/Screen%20Shot%202019-01-29%20at%201.28.06%20PM.png)
 
 5. Settings - Settings allows user to change the settings, the users can select country where he/she is geographically located in shared prefrence. 
-
-![image](https://github.com/LannyX/B16CourierTrackingSystem/blob/master/screenshot/Screen%20Shot%202019-01-29%20at%201.28.06%20PM.png)
 
 6. Contact us - User can get in touch with the customer service team either via email or phone.
 
