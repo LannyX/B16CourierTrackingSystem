@@ -45,3 +45,17 @@ In this application, users are able to check their shipment status or request a 
 ![image](https://github.com/LannyX/B16CourierTrackingSystem/blob/master/screenshot/Screen%20Shot%202019-01-29%20at%201.28.06%20PM.png)
 
 6. Contact us - User can get in touch with the customer service team either via email or phone.
+
+
+License
+=======
+See LICENSE.md
+
+
+Credits
+=================
+Developers:
+Muhammad Omer
+Phat Nguyen
+Lanny Xu
+
